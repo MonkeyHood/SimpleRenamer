@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRenamer", "SimpleRenamer\SimpleRenamer.csproj", "{A96A0844-3716-427D-9C5E-E0DBE285989C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRenamerLibrary", "SimpleRenamer\SimpleRenamerLibrary.csproj", "{A96A0844-3716-427D-9C5E-E0DBE285989C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renamer", "Renamer\Renamer.csproj", "{CFD72A51-2B12-4183-BBB3-B71181E8A2F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderFlattener", "FolderFlattener\FolderFlattener.csproj", "{74472383-9756-45E7-ABC2-B0DB3DA29C5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A96A0844-3716-427D-9C5E-E0DBE285989C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A96A0844-3716-427D-9C5E-E0DBE285989C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A96A0844-3716-427D-9C5E-E0DBE285989C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD72A51-2B12-4183-BBB3-B71181E8A2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD72A51-2B12-4183-BBB3-B71181E8A2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD72A51-2B12-4183-BBB3-B71181E8A2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD72A51-2B12-4183-BBB3-B71181E8A2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
