@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SimpleRenamer
 {
-    class RenameListGenerator
+    public class RenameListGenerator
     {
         private const string FULL_NAME_TEMPLATE = "{0}\\image {1}.{2}";
         private const int START_NUMBER = 1;

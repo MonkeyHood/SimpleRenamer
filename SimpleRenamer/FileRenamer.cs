@@ -15,13 +15,27 @@ namespace SimpleRenamer
         {
             currentDirectory = directoryPath;
 
-            //todo reset counter for different image extensions
+            ChangeExtensionForFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.JPEG_EXTENSION), Constants.JPEG_EXTENSION);
+
             GetAndRenameFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.JPG_EXTENSION), Constants.JPG_EXTENSION);
-            GetAndRenameFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.JPEG_EXTENSION), Constants.JPEG_EXTENSION);
             GetAndRenameFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.PNG_EXTENSION), Constants.PNG_EXTENSION);
             GetAndRenameFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.BMP_EXTENSION), Constants.BMP_EXTENSION);
         }
 
+        private void ChangeExtensionForFiles(string directoryPath, string searchPattern, string extension)
+        {
+            const string FILENAME_TEMPLATE = @"{0}\{1}.{2}";
+            string[] files = DirectoryUtils.GetAllFiles(directoryPath, searchPattern);
+            foreach(string file in files)
+            {
+                string randomName = NameUtils.GenerateUnusedName(FILENAME_TEMPLATE, directoryPath, Constants.JPG_EXTENSION);
+                RenameFile(file, randomName);
+            }
+        }
+
+        /// <summary>
+        /// Get all images that match the search pattern and rename them into a sequential list.
+        /// </summary>
         private void GetAndRenameFiles(string directoryPath, string searchPattern, string extension)
         {
             string[] files = DirectoryUtils.GetAllFiles(directoryPath, searchPattern);
@@ -67,29 +81,36 @@ namespace SimpleRenamer
             }
 
             RenameFile(originalName, desiredName);
-            TryRenamePsdFile(originalName, desiredName);
+            TryRenameAllPsdNameTypes(originalName, desiredName);
         }
 
-        private void RenameFile(string originalName, string desiredName, string msg = null)
+        private void RenameFile(string originalName, string desiredName)
         {
-            if (!string.IsNullOrEmpty(msg))
-            {
-                Logger.Log(msg);
-            }
-
             File.Move(originalName, desiredName);
         }
 
-        private void TryRenamePsdFile(string originalName, string desiredName)
+        private void TryRenameAllPsdNameTypes(string originalName, string desiredName)
         {
-            string psdOriginal = string.Format(@"{0}\{1}.{2}",
-                currentDirectory, Path.GetFileNameWithoutExtension(originalName), Constants.PSD_EXTENSION);
+            const string PLAIN_NAME = @"{0}\{1}.{2}";
+            const string BRACKET_NAME = @"{0}\{1} ({3}).{2}";
+            const string EXTENSION_NAME = @"{0}\{1} {3}.{2}";
 
-            if (File.Exists(psdOriginal))
+            string shortNameOriginal = Path.GetFileNameWithoutExtension(originalName);
+            string extension = FileUtils.GetExtension(originalName);
+
+            string shortNameDesired = Path.GetFileNameWithoutExtension(desiredName);
+            string desiredPsd = string.Format(BRACKET_NAME, currentDirectory, shortNameDesired, Constants.PSD_EXTENSION, extension);
+
+            TryRenameFile(desiredPsd, string.Format(PLAIN_NAME, currentDirectory, shortNameOriginal, Constants.PSD_EXTENSION));
+            TryRenameFile(desiredPsd, string.Format(BRACKET_NAME, currentDirectory, shortNameOriginal, Constants.PSD_EXTENSION, extension));
+            TryRenameFile(desiredPsd, string.Format(EXTENSION_NAME, currentDirectory, shortNameOriginal, Constants.PSD_EXTENSION, extension));
+        }
+
+        private void TryRenameFile(string desiredName, string originalName)
+        {
+            if (File.Exists(originalName))
             {
-                string psdDesired = string.Format(@"{0}\{1}.{2}",
-                    currentDirectory, Path.GetFileNameWithoutExtension(desiredName), Constants.PSD_EXTENSION);
-                RenameFile(psdOriginal, psdDesired);
+                RenameFile(originalName, desiredName);
             }
         }
 

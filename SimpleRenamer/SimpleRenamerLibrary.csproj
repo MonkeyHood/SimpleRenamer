@@ -49,6 +49,7 @@
     <Compile Include="DirectoryUtils.cs" />
     <Compile Include="FileMover.cs" />
     <Compile Include="FilenameComparer.cs" />
+    <Compile Include="NameUtils.cs" />
     <Compile Include="RenameListGenerator.cs" />
     <Compile Include="RenameCollection.cs" />
     <Compile Include="FileRenamer.cs" />

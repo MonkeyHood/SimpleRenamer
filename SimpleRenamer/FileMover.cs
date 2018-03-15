@@ -9,6 +9,8 @@ namespace SimpleRenamer
     {
         private const int DEFAULT_LEVELS = 1;
 
+        private const string FOLDER_EXAMPLE = " ( Image, 5 x 5 pixels)";
+
         private Random random = new Random();
 
         public void FlattenFolder(int levels = DEFAULT_LEVELS)
@@ -16,6 +18,7 @@ namespace SimpleRenamer
             string currentDirectory = Directory.GetCurrentDirectory();
             string[] allFolders = DirectoryUtils.GetAllFolders(currentDirectory);
 
+            Logger.Log("Looking for folder named with the style '{0}'", FOLDER_EXAMPLE);
             Logger.Log("Found {0} potential subfolders.", allFolders.Length);
 
             foreach(string sourceFolderPath in allFolders)

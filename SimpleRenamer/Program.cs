@@ -23,8 +23,9 @@ namespace SimpleRenamer
 
         static void Main(string[] args)
         {
+            ProcessArgs(args);
             Logger.Log(STARTUP_MESSAGE);
-            Logger.Log("Current director: {0}", Directory.GetCurrentDirectory());
+            Logger.Log("Current directory: {0}", Directory.GetCurrentDirectory());
             //string input = PauseConsole(CONTINUE_MESSAGE);
             //if(string.Compare(input, DECLINE, true) == EQUAL_STRING_VALUE)
             //{
@@ -38,6 +39,27 @@ namespace SimpleRenamer
                 PauseConsole("Press any key to exit");
                 Environment.Exit(NORMAL_EXIT);
             }
+        }
+
+        private static void ProcessArgs(string[] args)
+        {
+            const string NO_LOG_ARG = "NoLogs";
+            Logger.EnableLogs = !HasArg(args, NO_LOG_ARG);
+        }
+
+        private static bool HasArg(string[] args, string item)
+        {
+            bool foundArg = false;
+
+            foreach (string arg in args)
+            {
+                if(arg == item)
+                {
+                    foundArg = true;
+                }
+            }
+
+            return false;
         }
 
         private static string PauseConsole(string msg, params object[] args)
