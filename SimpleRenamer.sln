@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renamer", "Renamer\Renamer.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderFlattener", "FolderFlattener\FolderFlattener.csproj", "{74472383-9756-45E7-ABC2-B0DB3DA29C5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkMover", "BulkMover\BulkMover.csproj", "{8044F18B-6801-4A69-B391-FCEDDF180527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlattenAndRename", "FlattenAndRename\FlattenAndRename.csproj", "{407D0BC5-6F11-4779-8029-ECC89B89D4F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74472383-9756-45E7-ABC2-B0DB3DA29C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8044F18B-6801-4A69-B391-FCEDDF180527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8044F18B-6801-4A69-B391-FCEDDF180527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8044F18B-6801-4A69-B391-FCEDDF180527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8044F18B-6801-4A69-B391-FCEDDF180527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407D0BC5-6F11-4779-8029-ECC89B89D4F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407D0BC5-6F11-4779-8029-ECC89B89D4F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407D0BC5-6F11-4779-8029-ECC89B89D4F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407D0BC5-6F11-4779-8029-ECC89B89D4F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

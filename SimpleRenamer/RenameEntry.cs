@@ -12,10 +12,10 @@
 
         public bool HasDifferentName
         {
-            get { return HasOriginalName && OriginalName != NewName; }
+            get { return HasOriginalFile && OriginalName != NewName; }
         }
 
-        public bool HasOriginalName { get { return !string.IsNullOrEmpty(OriginalName); } }
+        public bool HasOriginalFile { get { return !string.IsNullOrEmpty(OriginalName); } }
 
         public RenameEntry(string name)
         {

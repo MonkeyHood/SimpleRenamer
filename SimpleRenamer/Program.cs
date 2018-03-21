@@ -23,9 +23,8 @@ namespace SimpleRenamer
 
         static void Main(string[] args)
         {
-            ProcessArgs(args);
-            Logger.Log(STARTUP_MESSAGE);
-            Logger.Log("Current directory: {0}", Directory.GetCurrentDirectory());
+            Logger.Log(LogLevel.Warning, STARTUP_MESSAGE);
+            Logger.Log(LogLevel.Warning, "Current directory: {0}", Directory.GetCurrentDirectory());
             //string input = PauseConsole(CONTINUE_MESSAGE);
             //if(string.Compare(input, DECLINE, true) == EQUAL_STRING_VALUE)
             //{
@@ -35,16 +34,9 @@ namespace SimpleRenamer
             {
                 fileMover.FlattenFolder();
                 renamer.CompressFileNumbers(Directory.GetCurrentDirectory());
-                Logger.Log("Rename complete!");
-                PauseConsole("Press any key to exit");
+                PauseConsole("Rename complete!\nPress any key to exit");
                 Environment.Exit(NORMAL_EXIT);
             }
-        }
-
-        private static void ProcessArgs(string[] args)
-        {
-            const string NO_LOG_ARG = "NoLogs";
-            Logger.EnableLogs = !HasArg(args, NO_LOG_ARG);
         }
 
         private static bool HasArg(string[] args, string item)
@@ -59,14 +51,14 @@ namespace SimpleRenamer
                 }
             }
 
-            return false;
+            return foundArg;
         }
 
         private static string PauseConsole(string msg, params object[] args)
         {
             if(!string.IsNullOrEmpty(msg))
             {
-                Logger.Log(msg, args);
+                Logger.Log(LogLevel.Warning, msg, args);
             }
 
             return Console.ReadLine();

@@ -11,6 +11,26 @@ namespace SimpleRenamer
     {
         private Dictionary<string, RenameEntry> _entries;
 
+        public bool HasIncompleteEntries
+        {
+            get
+            {
+                bool hasIncompleteEntry = false;
+
+                foreach(KeyValuePair<string, RenameEntry> kvp in _entries)
+                {
+                    if(!kvp.Value.HasOriginalFile)
+                    {
+                        hasIncompleteEntry = true;
+                        break;
+                    }
+
+                }
+
+                return hasIncompleteEntry;
+            }
+        }
+
         public RenameCollection(string[] originalFilenames, string extension, string currentDirectory)
         {
             RenameListGenerator generator = new RenameListGenerator(currentDirectory, extension);
@@ -21,7 +41,7 @@ namespace SimpleRenamer
 
         private void SetupEntries(string[] keys)
         {
-            _entries = new Dictionary<string, RenameEntry>(keys.Length);
+            _entries = new Dictionary<string, RenameEntry>(keys.Length, new FilenameComparer());
 
             foreach (string desiredFilename in keys)
             {
@@ -35,8 +55,8 @@ namespace SimpleRenamer
             for(int i = 0; i < originalFilenames.Count; ++i)
             {
                 string original = originalFilenames[i];
-                _entries.TryGetValue(original, out RenameEntry entry);
-                if(entry != null)
+                bool foundEntry = _entries.TryGetValue(original, out RenameEntry entry);
+                if(foundEntry)
                 {
                     entry.SetSameName();
 
@@ -46,7 +66,7 @@ namespace SimpleRenamer
             }
 
             List<RenameEntry> unmatchedEntries = 
-                _entries.Where((kvp) => !kvp.Value.HasOriginalName).Select((kvp) => kvp.Value)
+                _entries.Where((kvp) => !kvp.Value.HasOriginalFile).Select((kvp) => kvp.Value)
                 .ToList();
 
             Debug.Assert(unmatchedEntries.Count() == originalFilenames.Count,

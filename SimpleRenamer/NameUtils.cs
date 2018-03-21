@@ -8,6 +8,22 @@ namespace SimpleRenamer
     {
         private static Random random = new Random();
 
+        public static string GetNextUnusedFilename(string path, string filename, string extension,
+            ref int counter)
+        {
+            const string NAME_TEMPLATE = @"{0}\{1}\image {2}.{3}";
+            string newFilename;
+
+            do
+            {
+                newFilename = string.Format(NAME_TEMPLATE, path, filename, counter.ToString("D5"), extension);
+                ++counter;
+            }
+            while (File.Exists(newFilename));
+
+            return newFilename;
+        }
+
         /// <summary>
         /// Get a filename that does not exist in the directory.
         /// </summary>

@@ -18,12 +18,12 @@ namespace SimpleRenamer
             string currentDirectory = Directory.GetCurrentDirectory();
             string[] allFolders = DirectoryUtils.GetAllFolders(currentDirectory);
 
-            Logger.Log("Looking for folder named with the style '{0}'", FOLDER_EXAMPLE);
-            Logger.Log("Found {0} potential subfolders.", allFolders.Length);
+            Logger.Log(LogLevel.Warning, "Looking for folder named with the style '{0}'", FOLDER_EXAMPLE);
+            Logger.Log(LogLevel.Warning, "Found {0} potential subfolders.", allFolders.Length);
 
             foreach(string sourceFolderPath in allFolders)
             {
-                Logger.Log("Processing folder {0}", sourceFolderPath);
+                Logger.Log(LogLevel.Info, "Processing folder {0}", sourceFolderPath);
                 string folderName = Path.GetFileName(sourceFolderPath);
                 if(FolderIsValid(folderName))
                 {

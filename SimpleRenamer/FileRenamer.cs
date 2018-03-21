@@ -11,9 +11,16 @@ namespace SimpleRenamer
 
         private string currentDirectory;
 
-        public void CompressFileNumbers(string directoryPath)
+        public void CompressFileNumbers(string directoryPath = null)
         {
-            currentDirectory = directoryPath;
+            if (string.IsNullOrEmpty(directoryPath))
+            {
+                currentDirectory = Directory.GetCurrentDirectory();
+            }
+            else
+            {
+                currentDirectory = directoryPath;
+            }
 
             ChangeExtensionForFiles(directoryPath, string.Format(NAME_TEMPLATE, Constants.JPEG_EXTENSION), Constants.JPEG_EXTENSION);
 
@@ -40,6 +47,7 @@ namespace SimpleRenamer
         {
             string[] files = DirectoryUtils.GetAllFiles(directoryPath, searchPattern);
             Sort(ref files);
+            ToLowerFilenames(files);
             RenameFiles(files, extension);
         }
 
@@ -55,11 +63,19 @@ namespace SimpleRenamer
             other = temp;
         }
 
+        private void ToLowerFilenames(string[] files)
+        {
+            for(int i = 0; i < files.Length; ++i)
+            {
+                files[i] = files[i];
+            }
+        }
+
         private void RenameFiles(string[] filenames, string extension)
         {
             RenameCollection renameCollection = new RenameCollection(filenames, extension, currentDirectory);
             List<RenameEntry> renameEntries = renameCollection.GetEntries();
-            Logger.Log("Found {0} {1} images.", filenames.Length, extension);
+            Logger.Log(LogLevel.Info, "Found {0} {1} images.", filenames.Length, extension);
             for(int i = 0; i < renameEntries.Count; ++i)
             {
                 RenameEntry entry = renameEntries[i];
@@ -70,16 +86,11 @@ namespace SimpleRenamer
 
                 LogEntry(filenames.Length, i, entry);
             }
-            Logger.Log("Done {0} images.", extension);
+            Logger.Log(LogLevel.Info, "Done {0} images.", extension);
         }
 
-        private void RenameFileAndPsd(string originalName, string desiredName, string msg = null)
+        private void RenameFileAndPsd(string originalName, string desiredName)
         {
-            if (!string.IsNullOrEmpty(msg))
-            {
-                Logger.Log(msg);
-            }
-
             RenameFile(originalName, desiredName);
             TryRenameAllPsdNameTypes(originalName, desiredName);
         }
@@ -118,7 +129,7 @@ namespace SimpleRenamer
         {
             string msg = string.Format("{0}/{1} {2}", i + 1, length,
                                 entry.HasDifferentName ? string.Empty : "skipped");
-            Logger.Log(msg);
+            Logger.Log(LogLevel.Info, msg);
         }
     }
 }

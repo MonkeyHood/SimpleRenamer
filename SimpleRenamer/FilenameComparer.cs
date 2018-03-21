@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace SimpleRenamer
 {
-    class FilenameComparer : IComparer<string>
+    class FilenameComparer : IComparer<string>, IEqualityComparer<string>
     {
         public int Compare(string str, string other)
         {
@@ -27,6 +27,17 @@ namespace SimpleRenamer
             {
                 return strNumber.Value - otherNumber.Value;
             }
+        }
+
+        public bool Equals(string str, string other)
+        {
+            int comparison = string.Compare(str, other, true);
+            return comparison == 0;
+        }
+
+        public int GetHashCode(string obj)
+        {
+            return obj.ToLower().GetHashCode();
         }
 
         private int? ExtractNumber(string str)
